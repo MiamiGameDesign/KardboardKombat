@@ -2,27 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class krawdaddyControl : MonoBehaviour
 {
     private Rigidbody rb;
+    public Text health;
 
     public float PlayerSpeed = 100f;
 
-    [SerializeField] private float Health = 1000f;
+    [SerializeField] private float currHealth = 1000f;
+    [SerializeField] private float maxHealth = 1000f;
 
     private bool canHit = true;
 
     // Start is called before the first frame update
     void Start()
     {
+
         rb = GetComponent<Rigidbody>();
-        Health = 1000f;
+        currHealth = 1000f;
+        maxHealth = 1000f;
     }
 
     void Update()
     {
-        if (Health <= 0)
+        health.text = "Health: " + currHealth + " / " + maxHealth;
+        if (currHealth <= 0)
             SceneManager.LoadScene("SampleScene");
     }
     
@@ -63,7 +69,7 @@ public class krawdaddyControl : MonoBehaviour
 
     public void TakeDamage()
     {
-        Health -= 100;
+        currHealth -= 100;
     }
 }
 

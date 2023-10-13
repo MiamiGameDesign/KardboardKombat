@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class krawdaddyControl : MonoBehaviour
 {
@@ -16,14 +17,20 @@ public class krawdaddyControl : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Health = 1000f;
     }
 
+    void Update()
+    {
+        if (Health <= 0)
+            SceneManager.LoadScene("SampleScene");
+    }
+    
     // Update is called once per frame
     void FixedUpdate()
     {
         MoveCrawford();
     }
-
 
     private void MoveCrawford()
     {

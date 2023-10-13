@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NewtonControl : MonoBehaviour
 {
@@ -16,6 +17,13 @@ public class NewtonControl : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Health = 1000f;
+    }
+
+    void Update()
+    {
+        if (Health <= 0)
+            SceneManager.LoadScene("SampleScene");
     }
 
     // Update is called once per frame
@@ -43,7 +51,7 @@ public class NewtonControl : MonoBehaviour
         if (Input.GetKey(KeyCode.RightControl))
         {
             if (canHit)
-                other.gameObject.GetComponent<NewtonControl>().TakeDamage();
+                other.gameObject.GetComponent<krawdaddyControl>().TakeDamage();
 
             canHit = false;
         }

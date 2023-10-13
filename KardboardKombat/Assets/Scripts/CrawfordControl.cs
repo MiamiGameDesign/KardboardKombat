@@ -6,8 +6,11 @@ public class krawdaddyControl : MonoBehaviour
 {
     private Rigidbody rb;
 
-    public float PlayerSpeed = 300f;
+    public float PlayerSpeed = 100f;
 
+    [SerializeField] private float Health = 1000f;
+
+    private bool canHit = true;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +37,26 @@ public class krawdaddyControl : MonoBehaviour
             rb.Move(transform.position + Vector3.right * PlayerSpeed * Time.deltaTime, 
                 Quaternion.identity);
         }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            if (canHit)
+                other.gameObject.GetComponent<NewtonControl>().TakeDamage();
+
+            canHit = false;
+        }
+        else
+        {
+            canHit = true;
+        }
+    }
+
+    public void TakeDamage()
+    {
+        Health -= 100;
     }
 }
 

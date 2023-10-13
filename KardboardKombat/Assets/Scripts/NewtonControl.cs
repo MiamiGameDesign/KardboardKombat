@@ -26,6 +26,10 @@ public class NewtonControl : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         health.text = "Health: " + currHealth + " / " + maxHealth;
         if (currHealth <= 0)
             SceneManager.LoadScene("SampleScene");

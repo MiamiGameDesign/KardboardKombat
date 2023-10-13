@@ -4,46 +4,37 @@ using UnityEngine;
 
 public class krawdaddyControl : MonoBehaviour
 {
+    private Rigidbody rb;
 
-      
-    public float verticalInput;
-    public float horizontalInput;
-
-
-[SerializeField] GameObject Crawford;
-
-public float PlayerSpeed = 24f;
+    public float PlayerSpeed = 300f;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         MoveCrawford();
     }
 
 
-private void MoveCrawford() {
-    if (Input.GetKey(KeyCode.A)) {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-         transform.Translate(Vector3.up * verticalInput * PlayerSpeed * Time.deltaTime);
-        transform.Translate(Vector3.right * horizontalInput * PlayerSpeed * Time.deltaTime);
-}
-    else if (Input.GetKey(KeyCode.D)) {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-         transform.Translate(Vector3.up * verticalInput * PlayerSpeed * Time.deltaTime);
-        transform.Translate(Vector3.right * horizontalInput * PlayerSpeed * Time.deltaTime);
-    //return -1 to +1, left and right respectively
-}
-else {}
-}   
-
+    private void MoveCrawford()
+    {
+        if (Input.GetKey(KeyCode.A))
+        {
+            rb.Move(transform.position + -Vector3.right * PlayerSpeed * Time.deltaTime,
+                Quaternion.identity);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            rb.Move(transform.position + Vector3.right * PlayerSpeed * Time.deltaTime, 
+                Quaternion.identity);
+        }
+    }
 }
 
 
